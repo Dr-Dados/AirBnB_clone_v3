@@ -29,6 +29,6 @@ def status():
 def stast():
     """ return a Json for all classes and their count"""
     count_dict = {}
-    for key, val in classes.items():
-        count_dict[key] = models.storage.count(val)
+    for key in classes.keys():
+        count_dict[key] = models.storage.count(key)
     return jsonify(count_dict)
