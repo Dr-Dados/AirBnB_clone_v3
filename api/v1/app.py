@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """
-start flask app
+start flask app; register the blueprint app_views to app,
+also define a teardown mothode
 """
 from flask import Flask
 from models import storage
@@ -15,7 +16,7 @@ app.register_blueprint(app_views)
 @app.teardown_appcontext
 def teardown_methode(args):
     """
-    close the storage variable
+    close the sqlAlchemy session by calling close the methode on storage.
     """
     storage.close()
 

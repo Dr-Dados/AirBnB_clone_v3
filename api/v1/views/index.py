@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """
-endpoint will return status of API
+Create an endpoint that return a json object that have
+the status of our API
 """
 from api.v1.views import app_views
 from flask import jsonify
