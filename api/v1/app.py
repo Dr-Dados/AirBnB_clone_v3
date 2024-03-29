@@ -1,5 +1,7 @@
 #!/usr/bin/python3
-""" start flask app """
+"""
+start flask app
+"""
 from flask import Flask
 from models import storage
 from os import getenv
@@ -12,7 +14,9 @@ app.register_blueprint(app_views)
 
 @app.teardown_appcontext
 def teardown_methode(args):
-    """ close the storage variable """
+    """
+    close the storage variable
+    """
     storage.close()
 
 
