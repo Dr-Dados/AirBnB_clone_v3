@@ -78,4 +78,8 @@ class FileStorage:
         
     def count(self, cls=None):
         """ return number of objects """
-        return len(self.all(cls))
+        store = self.all(cls)
+        number = 0
+        for obj in store.values():
+            number += 1
+        return number
