@@ -3,9 +3,9 @@
 start flask app; register the blueprint app_views to app,
 also define a teardown mothode
 """
+from os import getenv
 from flask import Flask
 from models import storage
-from os import getenv
 from api.v1.views import app_views
 
 app = Flask(__name__)

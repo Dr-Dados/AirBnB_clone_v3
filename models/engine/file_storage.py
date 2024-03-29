@@ -73,7 +73,7 @@ class FileStorage:
         """ return an obj based on its class and ID """
         if cls and id:
             key = f"{cls.__name__}.{id}"
-            return FileStorage.__objects.get(key)
+            return FileStorage.__objects.get(key, None)
         else:
             return None
         

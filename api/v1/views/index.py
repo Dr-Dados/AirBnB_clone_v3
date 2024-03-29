@@ -3,8 +3,8 @@
 Create an endpoint that return a json object that have
 the status of our API
 """
-from api.v1.views import app_views
 from flask import jsonify
+from api.v1.views import app_views
 import models
 from models.amenity import Amenity
 from models.city import City
