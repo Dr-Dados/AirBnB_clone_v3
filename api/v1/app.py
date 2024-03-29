@@ -4,7 +4,7 @@ start flask app; register the blueprint app_views to app,
 also define a teardown mothode
 """
 from os import getenv
-from flask import Flask
+from flask import Flask, jsonify
 from models import storage
 from api.v1.views import app_views
 
@@ -19,6 +19,12 @@ def teardown_methode(args):
     close the sqlAlchemy session by calling close the methode on storage.
     """
     storage.close()
+
+
+@app.errorhandler(404)
+def not_found_page(err):
+    """ handling not found page """
+    return jsonify(error="Not found"), 404
 
 
 if __name__ == '__main__':
