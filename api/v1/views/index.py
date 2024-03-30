@@ -1,34 +1,37 @@
 #!/usr/bin/python3
+"""define routes of blueprint
 """
-Create an endpoint that return a json object that have
-the status of our API
-"""
-from flask import jsonify
+
 from api.v1.views import app_views
-import models
-from models.amenity import Amenity
+from models import storage
+from models.state import State
 from models.city import City
+from models.amenity import Amenity
 from models.place import Place
 from models.review import Review
-from models.state import State
 from models.user import User
 
-classes = {"Amenity": Amenity, "City": City,
-           "Place": Place, "Review": Review, "State": State, "User": User}
 
-
-@app_views.route('/status', strict_slashes=False)
+@app_views.route("/status", strict_slashes=False, methods=["GET"])
 def status():
-    """
-    return the status of the API
-    """
-    return jsonify({"status": "OK"})
+    return {
+        "status": "OK",
+    }
 
 
-@app_views.route('/stats', strict_slashes=False)
-def stast():
-    """ return a Json for all classes and their count"""
-    count_dict = {}
-    for key in classes.keys():
-        count_dict[key] = models.storage.count(key)
-    return jsonify(count_dict)
+@app_views.route("/stats", strict_slashes=False, methods=["GET"])
+def stats():
+    amenities = storage.count(Amenity)
+    cities = storage.count(City)
+    places = storage.count(Place)
+    reviews = storage.count(Review)
+    states = storage.count(State)
+    users = storage.count(User)
+    return {
+        "amenities": amenities,
+        "cities": cities,
+        "places": places,
+        "reviews": reviews,
+        "states": states,
+        "users": users,
+    }
