@@ -70,14 +70,14 @@ class FileStorage:
         self.reload()
 
     def get(self, cls, id):
-        """ return an obj based on its class and ID """
+        """Return an obj based on its class and ID."""
         if cls and id:
             key = f"{cls}.{id}"
             return self.__objects.get(key, None)
         return None
         
     def count(self, cls=None):
-        """ return number of objects """
+        """Return number of objects."""
         store = self.all(cls)
         number = 0
         for obj in store.values():
