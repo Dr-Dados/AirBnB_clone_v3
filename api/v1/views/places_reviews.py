@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""State objects that handles all default RESTFul API actions"""
+"""State objects that handles all default RESTFul API actions."""
 
 from api.v1.views import app_views
 from models import storage
@@ -13,7 +13,7 @@ from flask import abort, request, jsonify
 @app_views.route("places/<place_id>/reviews", strict_slashes=False,
                  methods=["GET"])
 def reviews(place_id):
-    """show reviews"""
+    """Show reviews."""
     reviews_list = []
     place = storage.get(Place, place_id)
     if place is None:
@@ -26,7 +26,7 @@ def reviews(place_id):
 
 @app_views.route("/reviews/<review_id>", strict_slashes=False, methods=["GET"])
 def get_review(review_id):
-    """Retrieves a review object"""
+    """Retrieve a review object."""
     review = storage.get(Review, review_id)
     if review is None:
         abort(404)
@@ -36,7 +36,7 @@ def get_review(review_id):
 @app_views.route("/reviews/<review_id>", strict_slashes=False,
                  methods=["DELETE"])
 def review_delete(review_id):
-    """delete method"""
+    """Delete method."""
     obj = storage.get(Review, review_id)
     if obj is None:
         abort(404)
@@ -48,7 +48,7 @@ def review_delete(review_id):
 @app_views.route("/places/<place_id>/reviews", strict_slashes=False,
                  methods=["POST"])
 def create_review(place_id):
-    """create a new post req"""
+    """Create a new post request."""
     place = storage.get(Place, place_id)
     if place is None:
         abort(404)
@@ -69,7 +69,7 @@ def create_review(place_id):
 
 @app_views.route("/reviews/<review_id>", strict_slashes=False, methods=["PUT"])
 def update_review(review_id):
-    """update review"""
+    """Update review."""
     review = storage.get(Review, review_id)
     if review is None:
         abort(404)
