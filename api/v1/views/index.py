@@ -1,38 +1,25 @@
 #!/usr/bin/python3
-"""Define routes of blueprint."""
-
+"""Index that for the app status."""
 from api.v1.views import app_views
+from flask import jsonify
 from models import storage
-from models.state import State
-from models.city import City
-from models.amenity import Amenity
-from models.place import Place
-from models.review import Review
-from models.user import User
+from models.engine import db_storage
 
 
-@app_views.route("/status", strict_slashes=False, methods=["GET"])
+@app_views.route('/status', methods=['GET'], strict_slashes=False)
 def status():
-    """Return status of API."""
-    return {
-        "status": "OK",
-    }
+    """Statu method for the app statu."""
+    statu = {"status": "OK"}
+    return jsonify(statu)
 
 
-@app_views.route("/stats", strict_slashes=False, methods=["GET"])
-def stats():
-    """Return the stats of every class."""
-    amenities = storage.count(Amenity)
-    cities = storage.count(City)
-    places = storage.count(Place)
-    reviews = storage.count(Review)
-    states = storage.count(State)
-    users = storage.count(User)
-    return {
-        "amenities": amenities,
-        "cities": cities,
-        "places": places,
-        "reviews": reviews,
-        "states": states,
-        "users": users,
-    }
+@app_views.route('/stats', methods=['GET'], strict_slashes=False)
+def count():
+    """Count retrieves the number of each objects by type."""
+    stats = {}
+
+    for cls_name in db_storage.classes:
+        count = storage.count(cls_name)
+        stats[cls_name] = count
+
+    return jsonify(stats)
