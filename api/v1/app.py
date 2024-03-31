@@ -1,5 +1,7 @@
 #!/usr/bin/python3
-"""Endpoint (route) will be to return the status of your API"""
+
+"""Endpoint (route) will be to return the status of your API."""
+
 import os
 from flask import Flask
 from models import storage
@@ -17,17 +19,20 @@ app.register_blueprint(app_views, url_prefix="/api/v1")
 
 @app.errorhandler(404)
 def page_not_found(e):
+    """Return 404 error."""
     return {"error": "Not found"}, 404
 
 
 @app.errorhandler(400)
 def page_not_found(e):
+    """Handle page not found."""
     message = e.description
     return message, 400
 
 
 @app.teardown_appcontext
 def close(ctx):
+    """Close session."""
     storage.close()
 
 

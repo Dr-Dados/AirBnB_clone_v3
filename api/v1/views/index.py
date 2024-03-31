@@ -1,6 +1,5 @@
 #!/usr/bin/python3
-"""define routes of blueprint
-"""
+"""Define routes of blueprint."""
 
 from api.v1.views import app_views
 from models import storage
@@ -14,6 +13,7 @@ from models.user import User
 
 @app_views.route("/status", strict_slashes=False, methods=["GET"])
 def status():
+    """Return status of API."""
     return {
         "status": "OK",
     }
@@ -21,6 +21,7 @@ def status():
 
 @app_views.route("/stats", strict_slashes=False, methods=["GET"])
 def stats():
+    """Return the stats of every class."""
     amenities = storage.count(Amenity)
     cities = storage.count(City)
     places = storage.count(Place)
