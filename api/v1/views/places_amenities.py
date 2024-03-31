@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""State objects that handles all default RESTFul API actions."""
+"""State objects that handles all default RESTFul API actions"""
 import os
 from api.v1.views import app_views
 from models import storage
@@ -13,7 +13,7 @@ db_mode = os.getenv("HBNB_TYPE_STORAGE")
 @app_views.route("/places/<place_id>/amenities", strict_slashes=False,
                  methods=["GET"])
 def place_amenities(place_id):
-    """Retrieve place amenities."""
+    """retrieve place amenities"""
     amenities_list = []
     place = storage.get(Place, place_id)
     if not place:
@@ -32,7 +32,7 @@ def place_amenities(place_id):
                  strict_slashes=False,
                  methods=["DELETE"])
 def delete_amenity(place_id, amenity_id):
-    """Delete an amenity with id."""
+    """deleye an amenity my id"""
     place = storage.get(Place, place_id)
     if not place:
         abort(404)
@@ -57,7 +57,7 @@ def delete_amenity(place_id, amenity_id):
                  strict_slashes=False,
                  methods=["POST"])
 def link_amenity(place_id, amenity_id):
-    """Link Amenity to a Place."""
+    """Link Amenity to a Place"""
     place = storage.get(Place, place_id)
     if not place:
         abort(404)

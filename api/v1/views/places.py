@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""State objects that handles all default RESTFul API actions."""
+"""State objects that handles all default RESTFul API actions"""
 
 from api.v1.views import app_views
 from models import storage
@@ -12,7 +12,7 @@ from flask import abort, request, jsonify
 @app_views.route("/cities/<city_id>/places", strict_slashes=False,
                  methods=["GET"])
 def places(city_id):
-    """Show places."""
+    """show places"""
     places_list = []
     city = storage.get(City, city_id)
     if city is None:
@@ -25,7 +25,7 @@ def places(city_id):
 
 @app_views.route("/places/<place_id>", strict_slashes=False, methods=["GET"])
 def get_place(place_id):
-    """Retrieve a City object."""
+    """Retrieves a City object"""
     place = storage.get(Place, place_id)
     if place is None:
         abort(404)
@@ -35,7 +35,7 @@ def get_place(place_id):
 @app_views.route("/places/<place_id>", strict_slashes=False,
                  methods=["DELETE"])
 def place_delete(place_id):
-    """Delete method."""
+    """delete method"""
     obj = storage.get(Place, place_id)
     if obj is None:
         abort(404)
@@ -47,7 +47,7 @@ def place_delete(place_id):
 @app_views.route("/cities/<city_id>/places", strict_slashes=False,
                  methods=["POST"])
 def create_place(city_id):
-    """Create a new post request."""
+    """create a new post req"""
     city = storage.get(City, city_id)
     if city is None:
         abort(404)
@@ -68,7 +68,7 @@ def create_place(city_id):
 
 @app_views.route("/places/<place_id>", strict_slashes=False, methods=["PUT"])
 def update_placey(place_id):
-    """Update place."""
+    """update place"""
     place = storage.get(Place, place_id)
     if place is None:
         abort(404)

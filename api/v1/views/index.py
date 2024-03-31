@@ -1,25 +1,37 @@
 #!/usr/bin/python3
-"""Index that for the app status."""
+"""define routes of blueprint
+"""
+
 from api.v1.views import app_views
-from flask import jsonify
 from models import storage
-from models.engine import db_storage
+from models.state import State
+from models.city import City
+from models.amenity import Amenity
+from models.place import Place
+from models.review import Review
+from models.user import User
 
 
-@app_views.route('/status', methods=['GET'], strict_slashes=False)
+@app_views.route("/status", strict_slashes=False, methods=["GET"])
 def status():
-    """Statu method for the app statu."""
-    statu = {"status": "OK"}
-    return jsonify(statu)
+    return {
+        "status": "OK",
+    }
 
 
-@app_views.route('/stats', methods=['GET'], strict_slashes=False)
-def count():
-    """Count retrieves the number of each objects by type."""
-    stats = {}
-
-    for cls_name in db_storage.classes:
-        count = storage.count(cls_name)
-        stats[cls_name] = count
-
-    return jsonify(stats)
+@app_views.route("/stats", strict_slashes=False, methods=["GET"])
+def stats():
+    amenities = storage.count(Amenity)
+    cities = storage.count(City)
+    places = storage.count(Place)
+    reviews = storage.count(Review)
+    states = storage.count(State)
+    users = storage.count(User)
+    return {
+        "amenities": amenities,
+        "cities": cities,
+        "places": places,
+        "reviews": reviews,
+        "states": states,
+        "users": users,
+    }
